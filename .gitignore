@@ -2,3 +2,4 @@ target/
 .metals/
 .bsp/
 .idea/
+*.class
