@@ -1,12 +1,9 @@
 SBT := sbt
 CS  := cs
+CLASS := Ft_ality.class
+SRC := src/scala/Main.scala
 
-.PHONY: help about run ensure-sbt
-
-help:
-	@echo "Targets available :"
-	@echo "  make about        -> Verify if sbt installed, install it if missing and run 'sbt about'"
-	@echo "  make run          -> Verify if sbt installed, install it if missing and run Ft_ality (later)"
+default: run
 
 ensure-sbt:
 	@echo "🔍 verifying sbt..."
@@ -16,7 +13,7 @@ ensure-sbt:
 		echo "⬇️  sbt not found, CS install"; \
 		$(CS) install sbt; \
 	elif command -v apt >/dev/null 2>&1; then \
-    		echo "⬇️  Installation de Coursier"; \
+    		echo "⬇️  Installation of Coursier"; \
     		sudo apt update && sudo apt install -y curl gzip; \
     		curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz \
     		  | gzip -d > $(CS) && chmod +x $(CS) && sudo mv $(CS) /usr/local/bin/cs; \
@@ -26,10 +23,16 @@ ensure-sbt:
 		exit 1; \
 	fi
 
-about: ensure-sbt
-	@echo "ℹ️  Informations about build :"
-	@$(SBT) about
+$(CLASS): $(SRC) ensure-sbt
+	@echo "🔨 Compiling ft_ality..."
+	@scalac $(SRC)
 
-run: ensure-sbt
-	@echo "🚀 Running Ft_ality"
-	@$(SBT) run
+run: $(CLASS)
+	@echo "🚀 Running ft_ality"
+	@scala Ft_ality
+
+clean:
+	@echo "🧹 Cleaned $(shell ls *.class 2>/dev/null)"
+	@rm -f Ft_ality.class
+
+re: clean run
