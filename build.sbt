@@ -1,0 +1,16 @@
+ThisBuild / scalaVersion := "3.3.7"
+
+ThisBuild / version      := "0.1.0-SNAPSHOT"
+
+ThisBuild / scalacOptions ++= Seq(
+  "-deprecation",
+  "-feature",
+  "-unchecked",
+  // "-Xfatal-warnings" uncomment if warnings should stop compiling (could imply that some librairy cant compile)
+)
+
+lazy val root = project
+  .in(file("."))
+  .settings(
+    name := "mon-projet-scala"
+  )
