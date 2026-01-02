@@ -33,6 +33,6 @@ run: $(CLASS)
 
 clean:
 	@echo "🧹 Cleaned $(shell ls *.class 2>/dev/null)"
-	@rm -f Ft_ality.class
+	@rm -f *.class
 
 re: clean run
