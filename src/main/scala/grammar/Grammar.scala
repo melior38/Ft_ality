@@ -27,7 +27,7 @@ case class Grammar(file: String, logger: Logger) {
         (temp(1), temp(0))
       })
       source.close()
-      print(lines)
+      print(lines.mkString("\r\n"))
       lines
     } catch {
       case e: Exception => logger.logError(e.getMessage)

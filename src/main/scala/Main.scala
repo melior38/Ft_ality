@@ -15,7 +15,9 @@ object Main {
     }
 
     val grammar = Grammar(ValidArguments(0), logger)
-    
+
+    val automatonTrainer = AutomatonTrainer()
+    val finalMap = automatonTrainer.generateStates(grammar.extractCombos(), State(0, Map.empty, false, "", ""), 1)
 
     val terminalHandler = KeyUtils
 
@@ -24,7 +26,7 @@ object Main {
       case None => logger.logError("Error happened with tty Setup, exiting !")
     }
 
-    val automaton: Automaton = Automaton(Map.empty, State(0, Map.empty, false, ""), State(0, Map.empty, false, ""), Map.empty)
+    val automaton: Automaton = Automaton(Map.empty, State(0, Map.empty, false, "", ""), State(0, Map.empty, false, "", ""), Map.empty)
     loop(automaton, ts, logger)
     terminalHandler.restoreTTY(ts, logger)
   }
