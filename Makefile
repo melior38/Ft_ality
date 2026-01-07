@@ -1,12 +1,12 @@
 SBT := sbt
 CS  := cs
-JAR := target/scala-3.3.7/ft_ality_3-0.1.0-SNAPSHOT.jar
+JAR := target/scala-3.3.7/ft_ality-assembly-0.1.0-SNAPSHOT.jar
 
-default: run
+default: assemble
 
 ensure-sbt:
 	@echo "🔍 verifying sbt..."
-	if command -v $(SBT) >/dev/null 2>&1; then \
+	@if command -v $(SBT) >/dev/null 2>&1; then \
 		echo "✅ sbt is installed"; \
 	elif command -v $(CS) >/dev/null 2>&1; then \
 		echo "⬇️  sbt not found, CS install"; \
@@ -26,13 +26,13 @@ ensure-sbt:
 		exit 1; \
 	fi
 
-package: $(SRC) ensure-sbt
+assemble: $(SRC) ensure-sbt
 	@echo "🔨 Compiling ft_ality..."
-	sbt package
+	@sbt -error assembly
 
-run: package
-	@echo "🚀 Running ft_ality"
-	scala3 $(JAR)
+#run: assemble
+#	@echo "🚀 Running ft_ality"
+#	@java -jar $(JAR)
 
 
 clean:

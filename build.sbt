@@ -10,5 +10,6 @@ Compile / compile / logLevel := Level.Error
 
 lazy val root = (project in file("."))
   .settings(
-    name := "ft_ality"
+    name := "ft_ality",
+    assembly / mainClass := Some("Main")
   )

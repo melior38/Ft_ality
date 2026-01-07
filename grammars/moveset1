@@ -1,0 +1,47 @@
+q -> Block
+down -> Down
+w -> Flip Stance
+left -> Left
+right -> Right
+e -> Tag
+a -> Throw
+up -> Up
+s -> [BK]
+d -> [BP]
+z -> [FK]
+x -> [FP]
+
+Heavy Punch: [BP], [BP]
+Jab Punch: [BP]
+Quick Kick: [FP]
+Heavy Kick: [FP], [FP]
+One-Two: [BP], [FP]
+Double Strike: [BP], [BP], [FP]
+Pressure Combo: [BP], [FP], [FP]
+Guard Punch: Block, [BP]
+Guard Kick: Block, [FP]
+Shield Breaker: Block, [BP], [FP]
+Quick Throw: Throw
+Punch Throw: [BP], Throw
+Combo Throw: [BP], [FP], Throw
+Low Punch: Down, [BP]
+Low Kick: Down, [FP]
+Rising Strike: Up, [BP]
+Rising Kick: Up, [FP]
+Stance Shift: Flip Stance
+Stance Strike: Flip Stance, [BP]
+Stance Combo: Flip Stance, [BP], [FP]
+Tag In: Tag
+Tag Strike: Tag, [BP]
+Tag Combo: [BP], [FP], Tag
+Counter Jab: Block, Down, [BP]
+Counter Kick: Block, Down, [FP]
+Step Punch: Left, [BP]
+Step Kick: Right, [FP]
+Cross Combo: Left, [BP], [FP]
+Ambush Combo: Flip Stance, [BP], [FP]
+Low Pressure: Down, [BP], [FP]
+Rising Assault: Up, [BP], [FP]
+Guard Breaker: Block, [BP], [BP]
+Power Finish: [BP], [FP], [FP]
+
