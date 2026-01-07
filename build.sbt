@@ -8,8 +8,6 @@ Global / parallelExecution := true
 
 Compile / compile / logLevel := Level.Error
 
-
-
 lazy val root = (project in file("."))
   .settings(
     name := "ft_ality"

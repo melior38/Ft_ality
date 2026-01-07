@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <option name="separateProdTestSources" value="true" />
+    <profile name="sbt 1" modules="ft_ality,ft_ality.main,ft_ality.test,ft_ality_3258,ft_ality_3258.main,ft_ality_3258.test" />
+  </component>
+</project>

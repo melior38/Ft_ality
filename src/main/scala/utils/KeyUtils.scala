@@ -30,6 +30,7 @@ object KeyUtils {
       termState
 
   def collectKey(terminalData: TerminalData): Option[Char] = {
+
     if terminalData.isRunning then
       try
         print(System.in.available())

@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ft_ality">
+    <output-path>$PROJECT_DIR$</output-path>
+    <root id="archive" name="ft_ality.jar" />
+  </artifact>
+</component>

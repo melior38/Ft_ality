@@ -2,6 +2,8 @@ import scala.io.Source
 import scala.sys.process._
 import scala.io.StdIn.readLine
 import utils.KeyUtils
+import utils.Loop.loop
+
 
 
 object Main {
@@ -19,18 +21,7 @@ object Main {
 
     print("Starting run\n")
     var run = true
-    var i = 0
-    while run do {
-      val collected = terminalHandler.collectKey(ts)
-      collected match
-        case Some(c) =>
-          print(s"Found char $c\n")
-          i += 1
-        case None =>
-          Thread.sleep(10)
-      if i >= 10 then
-        run = false
-    }
+    loop(ts)
 
 
     terminalHandler.restoreTTY(ts)
