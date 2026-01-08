@@ -28,6 +28,7 @@ object Loop {
         loop(newAutomaton, ts, logger)
       case None =>
         Thread.sleep(10)
+        //TODO: Check how to optimize this part not to clone automaton every 10 ms
         loop(automaton.copy(currentState = automaton.activeState()), ts, logger)
   }
 }
