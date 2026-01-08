@@ -1,8 +1,8 @@
-import utils.KeyUtils
 import Loop.loop
 import automaton.*
 import grammar.Grammar
 import logger.Logger
+import utils.KeyUtils
 
 
 
@@ -16,8 +16,14 @@ object Main {
 
     val grammar = Grammar(ValidArguments(0), logger)
 
-    val automatonTrainer = AutomatonTrainer()
-    val finalMap = automatonTrainer.generateStates(grammar.extractCombos(), State(0, Map.empty, false, "", ""), 1)
+    val alphabet: Map[String, String] = grammar.extractAlphabet()
+
+    alphabet.foreach((tpl) => logger.log(s"${tpl._1} -> ${tpl._2}"))
+    logger.log("---------------------")
+
+
+    val automatonTrainer: AutomatonTrainer = AutomatonTrainer()
+    val originalState: State = automatonTrainer.generateStates(grammar.extractCombos(), State(0, Map.empty, false, List.empty, ""), 1)
 
     val terminalHandler = KeyUtils
 
@@ -26,7 +32,7 @@ object Main {
       case None => logger.logError("Error happened with tty Setup, exiting !")
     }
 
-    val automaton: Automaton = Automaton(Map.empty, State(0, Map.empty, false, "", ""), State(0, Map.empty, false, "", ""), Map.empty)
+    val automaton: Automaton = Automaton(originalState, originalState, alphabet, 0)
     loop(automaton, ts, logger)
     terminalHandler.restoreTTY(ts, logger)
   }

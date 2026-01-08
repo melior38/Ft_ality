@@ -36,14 +36,15 @@ object KeyUtils {
     } else
       termState
 
-  def collectKey(terminalData: TerminalData): Option[Char] = {
+  def collectKey(terminalData: TerminalData): Option[List[Int]] = {
     if terminalData.isRunning then
-      try
-        if System.in.available() > 0 then
-          Some(System.in.read().toChar)
-        else
+      try {
+        val available = System.in.available()
+        if available > 0 then {
+          Some(List.fill(available)(System.in.read()))
+        } else
           None
-      catch
+      } catch
         case e: Exception => None
     else
       None

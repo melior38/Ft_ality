@@ -16,21 +16,21 @@ case class AutomatonTrainer() {
   }
 
   private final def updateHolderWithSequence(current: State, name: String, sequence: List[String], index: Int): (State, Int) = {
-    print(s"Currently working with sequence ${sequence.mkString}\r\n")
-    System.out.flush()
+//    print(s"Currently working with sequence ${sequence.mkString}\r\n")
+//    System.out.flush()
     sequence match {
       case Nil =>
-        print(s"Updating a value: ${current.id} ${true} ${name} ${current.comboKey}\r\n")
-        System.out.flush()
-        (current.copy(isFinal = true, comboName = name), index)
+//        print(s"Updating a value: ${current.id} ${true} ${name} ${current.comboKey}\r\n")
+//        System.out.flush()
+        (current.copy(isFinal = true, comboName = current.comboName :+ name), index)
       case move :: tail => {
         val (nextState, updatedNextId) = {
           current.nextMoves.get(move) match {
             case Some(exist) => (exist, index)
             case None =>
-              val created = State(index, Map.empty, false, "", move)
-              print(s"Creating a value for $move: ${index} ${false} ${""}\r\n")
-              System.out.flush()
+              val created = State(index, Map.empty, false, List.empty, move)
+//              print(s"Creating a value for $move: ${index} ${false} ${""}\r\n")
+//              System.out.flush()
               (created, index+1)
           }
         }
@@ -43,7 +43,7 @@ case class AutomatonTrainer() {
   }
 
   private def parseSequence(sequence: String): List[String] = {
-    sequence.split(", ").toList
+    sequence.filterNot(_.isWhitespace).split(",").toList
   }
 
 }

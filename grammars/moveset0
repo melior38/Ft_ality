@@ -1,6 +1,8 @@
 d -> [BP]
 x -> [FP]
 
-Punch: [BP]
-Combo: [BP], [FP]
 Kick: [BP], [FP], [BP]
+falcon Kick: [BP], [FP], [BP]
+dragon Kick: [BP], [FP], [BP]
+Kick1: [BP], [FP],[FP]
+Kick2: [BP],[BP],[BP]
