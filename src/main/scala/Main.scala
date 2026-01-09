@@ -14,26 +14,33 @@ object Main {
       logger.logError("Missing Grammar File !!")
     }
 
-    val grammar = Grammar(ValidArguments(0), logger)
+    val grammar = Grammar(ValidArguments(0))
 
-    val alphabet: Map[String, String] = grammar.extractAlphabet()
+    val grammarExtract = grammar.extractGrammar()
 
-    alphabet.foreach((tpl) => logger.log(s"${tpl._1} -> ${tpl._2}"))
-    logger.log("---------------------")
+    grammarExtract match {
+      case Left(errorMsg) =>
+        logger.logError(errorMsg)
+      case Right(value) => {
+        val (alphabet, combos) = value
+        alphabet.foreach((tpl) => logger.log(s"${tpl._1} -> ${tpl._2}"))
+        logger.log("---------------------")
 
 
-    val automatonTrainer: AutomatonTrainer = AutomatonTrainer()
-    val originalState: State = automatonTrainer.generateStates(grammar.extractCombos(), State(0, Map.empty, false, List.empty, ""), 1)
+        val automatonTrainer: AutomatonTrainer = AutomatonTrainer()
+        val originalState: State = automatonTrainer.generateStates(combos, State(0, Map.empty, false, List.empty, ""), 1)
 
-    val terminalHandler = KeyUtils
+        val terminalHandler = KeyUtils
 
-    val ts = terminalHandler.setupTTY() match {
-      case Some(validTerm) => validTerm
-      case None => logger.logError("Error happened with tty Setup, exiting !")
+        val ts = terminalHandler.setupTTY() match {
+          case Some(validTerm) => validTerm
+          case None => logger.logError("Error happened with tty Setup, exiting !")
+        }
+
+        val automaton: Automaton = Automaton(originalState, originalState, alphabet, 0)
+        loop(automaton, ts, logger)
+        terminalHandler.restoreTTY(ts, logger)
+      }
     }
-
-    val automaton: Automaton = Automaton(originalState, originalState, alphabet, 0)
-    loop(automaton, ts, logger)
-    terminalHandler.restoreTTY(ts, logger)
   }
 }

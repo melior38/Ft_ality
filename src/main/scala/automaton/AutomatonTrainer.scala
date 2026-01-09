@@ -8,7 +8,7 @@ case class AutomatonTrainer() {
   final def generateStates(combos: List[(String, String)], current: State, index: Int): State = {
       combos match {
         case Nil => current
-        case (sequence, name) :: tail =>
+        case (name, sequence) :: tail =>
           val moves = parseSequence(sequence)
           val (updatedRoot, newId) = updateHolderWithSequence(current, name, moves, index)
           generateStates(tail, updatedRoot, newId)

@@ -14,12 +14,13 @@ object Loop {
       case Some(c) =>
         val time = System.currentTimeMillis()
         val newState = automaton.delta(c)
+
         if newState.id != 0 then {
           logger.logDebug(s"State ${automaton.currentState.id}, \"${newState.comboKey}\" -> State ${newState.id}")
         }
         if newState.isFinal then
-          newState.comboName.foreach((name: String) => logger.logDebug(s"Found end state for \"${name}\" at: ${newState.id}"))
-          newState.comboName.foreach((name: String) => logger.log(s"${name}"))
+          newState.comboName.foreach(name => logger.logDebug(s"Found end state for \"${name}\" at: ${newState.id}"))
+          newState.comboName.foreach(name => logger.log(name))
           logger.log("")
         val newAutomaton = automaton.copy(
           currentState = newState,
@@ -31,5 +32,9 @@ object Loop {
         //TODO: Check how to optimize this part not to clone automaton every 10 ms
         loop(automaton.copy(currentState = automaton.activeState()), ts, logger)
   }
+
+  
+  def update(automaton: Automaton, input: List[Int], time: Long): Automaton =
+    automaton.copy(currentState = automaton.delta(input), timeSinceLastKey = time)
 }
 

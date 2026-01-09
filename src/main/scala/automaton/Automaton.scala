@@ -11,7 +11,7 @@ case class Automaton(
 
   def delta(input: List[Int]): State = {
     val fromState = activeState()
-    
+
     translate(input).flatMap(fromState.nextMoves.get).getOrElse(rootState)
   }
 
